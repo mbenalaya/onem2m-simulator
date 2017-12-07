@@ -55,7 +55,9 @@ public class RestHttpClient {
 		HttpGet httpGet = new HttpGet(uri);
 
 		httpGet.addHeader("X-M2M-Origin", originator);
-		httpGet.addHeader("X-M2M-Key", token);
+		httpGet.addHeader("X-M2M-RI",generateRI());
+
+		//httpGet.addHeader("X-M2M-Key", token);
 		httpGet.addHeader("Accept", "application/json");
 
 		HttpResponse httpResponse = new HttpResponse();
@@ -88,6 +90,8 @@ public class RestHttpClient {
 		HttpPut httpPut = new HttpPut(uri);
 
 		httpPut.addHeader("X-M2M-Origin", originator);
+		httpPut.addHeader("X-M2M-RI",generateRI());
+
 		//httpPut.addHeader("X-M2M-Key", token);
 		httpPut.addHeader("Content-Type", "application/json");
 		httpPut.addHeader("Accept", "application/json");
@@ -126,6 +130,8 @@ public class RestHttpClient {
 		HttpPost httpPost = new HttpPost(uri);
 
 		httpPost.addHeader("X-M2M-Origin", originator);
+		httpPost.addHeader("X-M2M-RI",generateRI());
+
 		//httpPost.addHeader("X-M2M-Key", token);
 		httpPost.addHeader("Accept", "application/json");
 
@@ -164,6 +170,8 @@ public class RestHttpClient {
 		HttpDelete httpDelete = new HttpDelete(uri);
 		//httpDelete.addHeader("X-M2M-Key", token);
 		httpDelete.addHeader("X-M2M-Origin", originator);
+		httpDelete.addHeader("X-M2M-RI",generateRI());
+
 		httpDelete.addHeader("Accept", "application/json");
 
 		HttpResponse httpResponse = new HttpResponse();
@@ -187,5 +195,10 @@ public class RestHttpClient {
 		System.out.println("HTTP Response " + httpResponse.getStatusCode()
 				+ "\n" + httpResponse.getBody());
 		return httpResponse;
+	}
+	
+	public static String generateRI(){
+		Integer random = (int)(Math.random()*1000)+100000;
+		return random.toString();
 	}
 }
