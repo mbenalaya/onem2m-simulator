@@ -91,7 +91,7 @@ public class Actuators {
 						obj.put("cnf", "application/json");
 					    JSONObject con = new JSONObject();
 					    con.put("myActuatorType", Constants.cntActuatorPrefix);
-					    con.put("myActuatorId", aeName);
+					    con.put("myActuatorId", aeName+"_"+Constants.cntActuatorPrefix);
 					    con.put("myActuatorData", Constants.values.get(index));
 						obj.put("con", con.toString());
 						
@@ -126,7 +126,7 @@ public class Actuators {
 			obj.put("cnf", "application/json");
 		    JSONObject con = new JSONObject();
 		    con.put("myActuatorType", Constants.cntActuatorPrefix);
-		    con.put("myActuatorId", Constants.aeDeviceIdPrefix+index);
+		    con.put("myActuatorId", Constants.aeDeviceIdPrefix+index+"_"+Constants.cntActuatorPrefix);
 		    con.put("myActuatorData", value);
 			obj.put("con", con.toString());
 			

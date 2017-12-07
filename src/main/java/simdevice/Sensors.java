@@ -19,13 +19,11 @@ public class Sensors {
 	
 	public static void start(){
 		for(int i = 0;i<Constants.numberOfDevice;i++){
-			if(i!=41 && i!=53 && i!=85){
 	
 				String aeName = Constants.aeDeviceNamePrefix+i;
 				//String aeid = Constants.aeDeviceIdPrefix+i;
 				String aeid = Constants.adminAeId;	
 				Sensors.start(aeid, aeName);
-			}
 		}
 	}
 	
@@ -81,7 +79,7 @@ public class Sensors {
 							obj.put("cnf", "application/json");
 						    JSONObject con = new JSONObject();
 						    con.put("mySensorType", cntName);
-						    con.put("mySensorId", name);
+						    con.put("mySensorId", name+'_'+cntName);
 						    con.put("mySensorData", getSensorValue());
 							obj.put("con", con.toString());
 							

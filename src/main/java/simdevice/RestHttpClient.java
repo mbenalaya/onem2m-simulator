@@ -170,8 +170,6 @@ public class RestHttpClient {
 		HttpDelete httpDelete = new HttpDelete(uri);
 		//httpDelete.addHeader("X-M2M-Key", token);
 		httpDelete.addHeader("X-M2M-Origin", originator);
-		httpDelete.addHeader("X-M2M-RI",generateRI());
-
 		httpDelete.addHeader("Accept", "application/json");
 
 		HttpResponse httpResponse = new HttpResponse();
