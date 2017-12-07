@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package adnsim;
+package simdevice;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
@@ -31,25 +31,26 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 
 public class RestHttpClient {
-	static void configureSSL(DefaultHttpClient httpclient) {
-		TrustStrategy acceptingTrustStrategy = (cert, authType) -> true;
-		SSLSocketFactory socketFactory;
-		try {
-			socketFactory = new SSLSocketFactory(acceptingTrustStrategy,
-					SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-			socketFactory
-					.setHostnameVerifier((X509HostnameVerifier) SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-			Scheme sch = new Scheme("https", 8443, socketFactory);
-			httpclient.getConnectionManager().getSchemeRegistry().register(sch);
-		} catch (KeyManagementException | UnrecoverableKeyException
-				| NoSuchAlgorithmException | KeyStoreException e) {
-			e.printStackTrace();
-		}
-	}
+	
+//	static void configureSSL(DefaultHttpClient httpclient) {
+//		TrustStrategy acceptingTrustStrategy = (cert, authType) -> true;
+//		SSLSocketFactory socketFactory;
+//		try {
+//			socketFactory = new SSLSocketFactory(acceptingTrustStrategy,
+//					SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+//			socketFactory
+//					.setHostnameVerifier((X509HostnameVerifier) SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+//			Scheme sch = new Scheme("https", 8443, socketFactory);
+//			httpclient.getConnectionManager().getSchemeRegistry().register(sch);
+//		} catch (KeyManagementException | UnrecoverableKeyException
+//				| NoSuchAlgorithmException | KeyStoreException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public static HttpResponse get(String originator, String token, String uri) {
 		DefaultHttpClient httpclient = new DefaultHttpClient();
-		configureSSL(httpclient);
+		//configureSSL(httpclient);
 		System.out.println("HTTP GET " + uri);
 		HttpGet httpGet = new HttpGet(uri);
 
@@ -80,14 +81,14 @@ public class RestHttpClient {
 	public static HttpResponse put(String originator, String token, String uri,
 			String body) {
 		DefaultHttpClient httpclient = new DefaultHttpClient();
-		configureSSL(httpclient);
+		//configureSSL(httpclient);
 
 		System.out.println("HTTP PUT " + uri + "\n" + body);
 
 		HttpPut httpPut = new HttpPut(uri);
 
 		httpPut.addHeader("X-M2M-Origin", originator);
-		httpPut.addHeader("X-M2M-Key", token);
+		//httpPut.addHeader("X-M2M-Key", token);
 		httpPut.addHeader("Content-Type", "application/json");
 		httpPut.addHeader("Accept", "application/json");
 
@@ -119,28 +120,13 @@ public class RestHttpClient {
 	public static HttpResponse post(String originator, String token,
 			String uri, String body, int ty) {
 		DefaultHttpClient httpclient = new DefaultHttpClient();
-		configureSSL(httpclient);
-
-		TrustStrategy acceptingTrustStrategy = (cert, authType) -> true;
-		SSLSocketFactory socketFactory;
-		try {
-			socketFactory = new SSLSocketFactory(acceptingTrustStrategy,
-					SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-			socketFactory
-					.setHostnameVerifier((X509HostnameVerifier) SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-			Scheme sch = new Scheme("https", 8443, socketFactory);
-			httpclient.getConnectionManager().getSchemeRegistry().register(sch);
-		} catch (KeyManagementException | UnrecoverableKeyException
-				| NoSuchAlgorithmException | KeyStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//configureSSL(httpclient);
 
 		System.out.println("HTTP POST " + uri + "\n" + body);
 		HttpPost httpPost = new HttpPost(uri);
 
 		httpPost.addHeader("X-M2M-Origin", originator);
-		httpPost.addHeader("X-M2M-Key", token);
+		//httpPost.addHeader("X-M2M-Key", token);
 		httpPost.addHeader("Accept", "application/json");
 
 		httpPost.addHeader("Content-Type", "application/json;ty=" + ty);
@@ -171,12 +157,12 @@ public class RestHttpClient {
 	public static HttpResponse delete(String originator, String token,
 			String uri) {
 		DefaultHttpClient httpclient = new DefaultHttpClient();
-		configureSSL(httpclient);
+		//configureSSL(httpclient);
 
 		System.out.println("HTTP DELETE " + uri);
 
 		HttpDelete httpDelete = new HttpDelete(uri);
-		httpDelete.addHeader("X-M2M-Key", token);
+		//httpDelete.addHeader("X-M2M-Key", token);
 		httpDelete.addHeader("X-M2M-Origin", originator);
 		httpDelete.addHeader("Accept", "application/json");
 

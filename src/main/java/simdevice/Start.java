@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package adnsim;
+package simdevice;
 
 import java.io.FileInputStream;
 import java.io.IOException;

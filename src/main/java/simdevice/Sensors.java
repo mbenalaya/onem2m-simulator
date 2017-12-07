@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package adnsim;
+package simdevice;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
